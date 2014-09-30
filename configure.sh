@@ -1,14 +1,15 @@
 #! /bin/bash
 
-if [ $# -ne 1 ]
+if [ $# -ne 2 ]
 then
-  echo "usage: configure <number of servers>"
+  echo "usage: configure <jvm memory> <number of servers>"
   exit -1
 fi
 
 rm kafka*.service
 
-SERVER_COUNT=$1
+JVM_MEM=$1
+SERVER_COUNT=$2
 
 while read ip
 do
@@ -22,7 +23,8 @@ INDEX=0
 while [ $INDEX -lt $SERVER_COUNT ]
 do
 	ID=$(($INDEX+1))
-	sed -e "s/#ZOOKEEPERS#/$ALLIPS/" kafka.service.template > kafka@$ID.service
+	IP=${IPS[$INDEX]}
+	sed -e "s/#ZOOKEEPERS#/$ALLIPS/" -e "s/#JVM_MEM#/$JVM_MEM/" -s "s/#IP#/$IP/" kafka.service.template > kafka@$ID.service
 	let INDEX=INDEX+1
 done
 
