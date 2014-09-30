@@ -1,6 +1,5 @@
 broker.id=broker
 port=9092
-advertised.host.name=publicip
 num.network-threads=2
 num.io.threads=2
 

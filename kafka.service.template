@@ -11,11 +11,10 @@ ExecStartPre=/usr/bin/docker pull nrandell/kafka-centos
 ExecStart=/usr/bin/docker run \
 	--rm \
 	--name kafka-%i \
+	--net host
 	--env BROKER_ID=%i \
-	--hostname kafka-%i \
 	--env ZOOKEEPERS=#ZOOKEEPERS# \
 	--env JVM_MEM=#JVM_MEM# \
-	--env IP=#IP# \
 	--publish 9092:9092 \
 	--volume /var/kafka:/data \
 	nrandell/kafka-centos

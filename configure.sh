@@ -24,7 +24,7 @@ while [ $INDEX -lt $SERVER_COUNT ]
 do
 	ID=$(($INDEX+1))
 	IP=${IPS[$INDEX]}
-	sed -e "s/#ZOOKEEPERS#/$ALLIPS/" -e "s/#JVM_MEM#/$JVM_MEM/" -s "s/#IP#/$IP/" kafka.service.template > kafka@$ID.service
+	sed -e "s/#ZOOKEEPERS#/$ALLIPS/" -e "s/#JVM_MEM#/$JVM_MEM/" kafka.service.template > kafka@$ID.service
 	let INDEX=INDEX+1
 done
 
