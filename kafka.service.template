@@ -1,0 +1,23 @@
+[Unit]
+Description=kafka
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill nrandell/kafka-centos
+ExecStartPre=-/usr/bin/docker rm nrandell/kafka-centos
+ExecStartPre=/usr/bin/docker pull nrandell/kafka-centos
+ExecStart=/usr/bin/docker run \
+	--rm \
+	--name kafka-%i \
+	--env BROKER_ID=%i \
+	--hostname kafka-%i \
+	--env ZOOKEEPERS=#ZOOKEEPERS# \
+	--publish 9092:9092 \
+	--volume /var/kafka:/data \
+	nrandell/kafka-centos
+
+ExecStop=/usr/bin/docker stop kafka-%i
+
+[X-Fleet]
