@@ -11,9 +11,9 @@ ExecStartPre=/usr/bin/docker pull nrandell/kafka-centos
 ExecStart=/usr/bin/docker run \
 	--rm \
 	--name kafka-%i \
-	--net host
 	--env BROKER_ID=%i \
-	--env ZOOKEEPERS=#ZOOKEEPERS# \
+	--env BROKER_HOST=#BROKER_HOST# \
+	--env ZOOKEEPERS=zookeeper.linode.nickrandell.me \
 	--env JVM_MEM=#JVM_MEM# \
 	--publish 9092:9092 \
 	--volume /var/kafka:/data \
@@ -22,3 +22,6 @@ ExecStart=/usr/bin/docker run \
 ExecStop=/usr/bin/docker stop kafka-%i
 
 [X-Fleet]
+Conflicts=kafka*
+MachineMetadata=id=%i
+MachineMetadata=use=infrastructure
