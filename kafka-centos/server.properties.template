@@ -2,6 +2,7 @@ broker.id=broker
 port=9092
 num.network-threads=2
 num.io.threads=2
+advertised.host.name=
 
 socket.send.buffer.bytes=1048576
 socket.receive.buffer.bytes=1048576
