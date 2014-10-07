@@ -10,7 +10,7 @@ WORKDIR /opt/kafka_2.9.2-0.8.1.1
 ENV KAFKA_HOME /opt/kafka_2.9.2-0.8.1.1
 
 
-VOLUME ["/data"]
+VOLUME ["/data","/opt/kafka_2.9.2-0.8.1.1/logs"]
 ENTRYPOINT ["/opt/kafka_2.9.2-0.8.1.1/start.sh"]
 
 

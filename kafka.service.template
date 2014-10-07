@@ -17,6 +17,7 @@ ExecStart=/usr/bin/docker run \
 	--env JVM_MEM=#JVM_MEM# \
 	--publish 9092:9092 \
 	--volume /var/kafka:/data \
+	--volume /var/kafka-logs:/opt/kafka_2.9.2-0.8.1.1/logs \
 	nrandell/kafka-centos
 
 ExecStop=/usr/bin/docker stop kafka-%i
