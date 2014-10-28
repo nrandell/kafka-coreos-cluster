@@ -5,8 +5,10 @@ Requires=docker.service
 
 [Service]
 TimeoutStartSec=0
-ExecStartPre=-/usr/bin/docker kill nrandell/kafka-centos
-ExecStartPre=-/usr/bin/docker rm nrandell/kafka-centos
+ExecStartPre=-/usr/bin/mkdir -p /var/kafka
+ExecStartPre=/usr/bin/chattr -R +C /var/kafka
+ExecStartPre=-/usr/bin/docker kill kafka-%i
+ExecStartPre=-/usr/bin/docker rm kafka-%i
 ExecStartPre=/usr/bin/docker pull nrandell/kafka-centos
 ExecStart=/usr/bin/docker run \
 	--rm \
